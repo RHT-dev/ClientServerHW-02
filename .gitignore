@@ -1,0 +1,50 @@
+# --- Java ---
+*.class
+*.jar
+*.war
+*.ear
+
+# --- IDEs ---
+# IntelliJ IDEA
+.idea/
+*.iml
+out/
+
+# VS Code
+.vscode/
+
+# NetBeans
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# Eclipse
+*.log
+*.tmp
+*.bak
+*.swp
+*~.nib
+.metadata/
+bin/
+tmp/
+*.launch
+*.settings/
+.loadpath
+
+# Mac OS
+.DS_Store
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+
+# Others
+target/
+.gradle/
+build/
