@@ -14,10 +14,13 @@ public class ClientHandler implements Runnable {
     private Socket socket;
     private PrintWriter out;
 
+    private String username;
+
     private static final List<PrintWriter> clients = Collections.synchronizedList(new ArrayList<>());
 
     public ClientHandler(Socket socket) {
         this.socket = socket;
+        this.username = "Гость_" + socket.getPort();
     }
 
     private void broadcast(String message) {
@@ -41,7 +44,22 @@ public class ClientHandler implements Runnable {
 
             while (input.hasNextLine()) {
                 String message = input.nextLine();
-                broadcast("Клиент " + socket.getPort() + ": " + message);
+
+                // команда /name
+                if (message.startsWith("/name")) {
+                    String newUsername = message.substring(6).trim();
+
+                    if (!newUsername.isEmpty() && !newUsername.contains("/")) {
+                        broadcast(username + " теперь известен как '" + newUsername + "'!");
+                        username = newUsername;
+                        out.println("Новое имя: " + newUsername);
+                    }
+                    else {
+                        out.println("Имя не может быть пустым или содержать '/'");
+                    }
+                    continue;
+                }
+                broadcast(username + ": " + message);
             }
         }
         catch (IOException exception) {
